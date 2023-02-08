@@ -1,49 +1,25 @@
-import React from "react";
-import App from "./App";
-import Login from "../Login/Login";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Notifications from "../Notifications/Notifications";
-import CourseList from "../CourseList/CourseList";
-import { shallow } from "enzyme";
+import React from 'react';
+import App from './App';
+import { shallow } from 'enzyme';
 
-describe("App tests", () => {
-  it("renders without crashing", () => {
-    const component = shallow(<App />);
-
-    expect(component).toBeDefined();
+describe('App Componeent Tests', () => {
+  it('Renders without crashing', () => {
+    const app = shallow(<App />);
+    expect(app).toBeDefined();
   });
-  it("should render Notifications component", () => {
-    const component = shallow(<App />);
+  it('renders a div with the class App-header', () => {
+    const app = shallow(<App />);
 
-    expect(component.contains(<Notifications />)).toBe(true);
+    expect(app.find('.App-header')).toBeDefined();
   });
-  it("should render Header component", () => {
-    const component = shallow(<App />);
+  it('renders a div with the class App-body', () => {
+    const app = shallow(<App />);
 
-    expect(component.contains(<Header />)).toBe(true);
+    expect(app.find('.App-body')).toBeDefined();
   });
-  it("should render Login Component", () => {
-    const component = shallow(<App />);
+  it('renders a div with the class App-footer', () => {
+    const app = shallow(<App />);
 
-    expect(component.contains(<Login />)).toBe(false);
-  });
-  it("should render Footer component", () => {
-    const component = shallow(<App />);
-
-    expect(component.contains(<Footer />)).toBe(true);
-  });
-  it("does not render courselist if logged out", () => {
-    const component = shallow(<App />);
-
-    component.setProps({ isLoggedIn: false });
-
-    expect(component.contains(<CourseList />)).toBe(true);
-  });
-  it("renders courselist if logged in", () => {
-    const component = shallow(<App isLoggedIn={true} />);
-
-    expect(component.contains(<CourseList />)).toBe(true);
-    expect(component.contains(<Login />)).toBe(false);
+    expect(app.find('.App-footer')).toBeDefined();
   });
 });

@@ -1,31 +1,31 @@
-import React from "react";
-import Notifications from "../Notifications/Notifications";
-import Header from "../Header/Header";
-import Login from "../Login/Login";
-import Footer from "../Footer/Footer";
-import CourseList from "../CourseList/CourseList";
-import PropTypes from "prop-types";
-import "./App.css";
+import logo from '../assets/holberton-logo.jpg';
+import './App.css';
+import { getFullYear, getFooterCopy } from '../utils/utils';
 
-function App(isLoggedIn) {
+function App() {
   return (
-    <React.Fragment>
-      <Notifications />
-      <div className="App">
-        <Header />
-        {isLoggedIn ? <CourseList /> : <Login />}
-        <Footer />
-      </div>
-    </React.Fragment>
+    <div className='App'>
+      <header className='App-header'>
+        <img src={logo} alt='logo' />
+        <h1>School dashboard</h1>
+      </header>
+      <body className='App-body'>
+        <p>Login to access the full dashboard</p>
+        <label for='email'>
+          Email: <input type='text' />
+        </label>
+        <label for='password'>
+          Password: <input type='text'></input>
+        </label>
+        <button>OK</button>
+      </body>
+      <footer className='App-footer'>
+        <p>
+          Copyright {getFullYear()} - {getFooterCopy(true)}
+        </p>
+      </footer>
+    </div>
   );
 }
-
-App.defaultProps = {
-  isLoggedIn: false,
-};
-
-App.propTypes = {
-  isLoggedIn: PropTypes.bool,
-};
 
 export default App;
