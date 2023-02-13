@@ -1,6 +1,11 @@
 import React from 'react';
 import CourseListRow from './CourseListRow';
 import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
 
 
 describe('CourseListRow component when isHeader prop is true', () => {

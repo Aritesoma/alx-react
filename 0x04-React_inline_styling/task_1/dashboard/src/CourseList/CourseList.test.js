@@ -2,6 +2,11 @@ import React from 'react';
 import CourseList from './CourseList';
 import { listCourses } from '../App/App';
 import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
 
 const wrapper = shallow(<CourseList/>)
 describe('CourseList component when listCourses prop is empty/not specified', () => {
