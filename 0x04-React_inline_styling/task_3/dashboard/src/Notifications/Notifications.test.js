@@ -18,7 +18,7 @@ and listNotifications prop is not empty`, () => {
   })
 
   it("renders Notifications div", () => {
-    expect(wrapper.find('.Notifications_6aqpfh').exists()).toEqual(true)
+    expect(wrapper.find('.Notifications_11a6kfn').exists()).toEqual(true)
   })
 
   it("renders three list items", () => {
@@ -32,11 +32,11 @@ and listNotifications prop is not empty`, () => {
   it("renders first NotificationItem element with the right html", () => {
     const firstChild = wrapper.find('ul').children().first();
     // console.log(firstChild.html())
-    expect(firstChild.html()).toBe('<li class="default_15qxxom" data-notification-type="default">New course available</li>');
+    expect(firstChild.html()).toBe('<li class="default_15qxxom-o_O-listItem_1fp99j6" data-notification-type="default">New course available</li>');
   })
 
   it("renders div with menuItem class", () => {
-    expect(wrapper.find('.menuItem_1pelt06').exists()).toEqual(true)
+    expect(wrapper.find('.menuItem_any8iv').exists()).toEqual(true)
   })
 
   afterEach(() => {
@@ -80,7 +80,7 @@ and listNotifications prop is empty (or not used)`, () => {
 const wrapper_displayFalse = shallow(<Notifications displayDrawer={false}/>);
 describe('Notifications Component when displayDrawer prop is false', () => {
   it("renders div with menuItem class", () => {
-    expect(wrapper.find('.menuItem_1pelt06').exists()).toEqual(true)
+    expect(wrapper.find('.menuItem_any8iv').exists()).toEqual(true)
   })
 
   it("does not render Notifications div", () => {

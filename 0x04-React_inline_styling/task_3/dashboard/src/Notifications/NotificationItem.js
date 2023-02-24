@@ -9,11 +9,23 @@ const styles = StyleSheet.create({
 
   urgent: {
     color:"red"
+  },
+
+  listItem: {
+    '@media (max-width: 900px)': {
+      borderBottom: "1px solid black",
+      listStyle: "none",
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingLeft: 8,
+      paddingRight: 8
+    }
   }
+
 })
 
 const NotificationItem = React.memo(function NotificationItem(props) {
-  const NotifType = css(props.type == "default" ? styles.default : styles.urgent)
+  const NotifType = css(props.type == "default" ? styles.default : styles.urgent, styles.listItem)
   return(
     <li className={NotifType} data-notification-type={props.type} dangerouslySetInnerHTML={props.html}
     onClick={()=>props.markAsRead(props.id)}>{props.value}</li>

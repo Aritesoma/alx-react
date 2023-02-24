@@ -10,10 +10,20 @@ const styles = StyleSheet.create({
     border:"2px dashed red",
     padding: 5,
     width: "30%",
-    position: "fixed",
+    position: "absolute",
     right: 0,
-    top: "4%",
-    marginRight: 10
+    top: "5%",
+    marginRight: 10,
+    '@media (max-width: 900px)': {
+      border: "none",
+      top: 0,
+      height: "100%",
+      padding: 0,
+      fontSize: 20,
+      width: "97%",
+      background: "white",
+      zIndex: "9999"
+    }
   },
 
   p: {
@@ -23,6 +33,9 @@ const styles = StyleSheet.create({
 
   ul: {
     margin: 1,
+    '@media (max-width: 900px)': {
+      padding: 0,
+      }
   },
 
   menuList: {
@@ -32,7 +45,8 @@ const styles = StyleSheet.create({
   menuItem: {
     position: "fixed",
     right: 0,
-    paddingRight: 10
+    paddingRight: 10,
+    marginBottom: 6,
   }
 })
 
@@ -96,12 +110,12 @@ export default class Notifications extends React.Component {
               aria-label="Close"
               onClick={()=>console.log('Close button has been clicked')}>
                 <img src={closebtn} alt="close-btn"/>
-              </button>
+[O              </button>
               {loadNotifs()}
             </div>
           </>
         )
-[O      }
+      }
     }
     return (
     <>
