@@ -32,7 +32,7 @@ and listNotifications prop is not empty`, () => {
   it("renders first NotificationItem element with the right html", () => {
     const firstChild = wrapper.find('ul').children().first();
     // console.log(firstChild.html())
-    expect(firstChild.html()).toBe('<li data-notification-type="default">New course available</li>');
+    expect(firstChild.html()).toBe('<li class="default_15qxxom" data-notification-type="default">New course available</li>');
   })
 
   it("renders div with menuItem class", () => {

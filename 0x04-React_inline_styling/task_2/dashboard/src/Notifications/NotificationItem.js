@@ -1,9 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { StyleSheet, css } from 'aphrodite';
+
+const styles = StyleSheet.create({
+  default: {
+    color: "darkblue"
+  },
+
+  urgent: {
+    color:"red"
+  }
+})
 
 const NotificationItem = React.memo(function NotificationItem(props) {
+  const NotifType = css(props.type == "default" ? styles.default : styles.urgent)
   return(
-    <li data-notification-type={props.type} dangerouslySetInnerHTML={props.html}
+    <li className={NotifType} data-notification-type={props.type} dangerouslySetInnerHTML={props.html}
     onClick={()=>props.markAsRead(props.id)}>{props.value}</li>
   )
 })

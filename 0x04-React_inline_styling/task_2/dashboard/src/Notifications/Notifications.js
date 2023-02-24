@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import './Notifications.css';
 import closebtn from '../assets/close-btn.png';
 import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
@@ -70,7 +69,7 @@ export default class Notifications extends React.Component {
           return <p>No new notification for now</p>
       } else {
           rows = notifArray.map((notif) => {
-[O            if (notif.html != undefined && notif.html.__html != null){
+            if (notif.html != undefined && notif.html.__html != null){
               return (<NotificationItem key={notif.id} id={notif.id} type={notif.type}
               html={notif.html} markAsRead={this.markAsRead}/>)
             } else {
@@ -102,7 +101,7 @@ export default class Notifications extends React.Component {
             </div>
           </>
         )
-      }
+[O      }
     }
     return (
     <>
@@ -112,3 +111,4 @@ export default class Notifications extends React.Component {
     )
   }
 }
+
