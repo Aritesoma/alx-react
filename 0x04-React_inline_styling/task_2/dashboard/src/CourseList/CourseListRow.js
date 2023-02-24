@@ -1,7 +1,18 @@
 import React from 'react';
-import './CourseList.css'
 import PropTypes from 'prop-types';
+import { StyleSheet, css} from 'aphrodite';
 
+const styles = StyleSheet.create({
+  th: {
+    borderBottom: "1px solid black",
+    textAlign: "left",
+  },
+
+  th_colspan: {
+      borderBottom: "1px solid black",
+      textAlign: "center",
+  }
+})
 
 function CourseListRow(props) {
   const rowStyle = {
@@ -10,12 +21,12 @@ function CourseListRow(props) {
 
   if (props.isHeader) {
     if (props.textSecondCell == null) {
-      return <tr style={rowStyle}><th colSpan="2">{props.textFirstCell}</th></tr>
+      return <tr style={rowStyle}><th className={css(styles.th, styles.th_colspan)} colSpan="2">{props.textFirstCell}</th></tr>
     } else {
       return (
         <tr style={rowStyle}>
-          <th>{props.textFirstCell}</th>
-          <th>{props.textSecondCell}</th>
+          <th className={css(styles.th)}>{props.textFirstCell}</th>
+          <th className={css(styles.th)}>{props.textSecondCell}</th>
         </tr>
         )
     }
