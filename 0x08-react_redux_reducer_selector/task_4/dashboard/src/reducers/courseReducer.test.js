@@ -1,10 +1,12 @@
 import { courseReducer } from "./courseReducer";
+import { coursesNormalizer } from "../schema/courses";
 import * as actions from '../actions/courseActionTypes';
+import { Map } from 'immutable';
 
 describe('Testing courseReducer', () => {
   it('Test that the default state returns an empty array', () => {
     const res = courseReducer();
-    expect(res).toStrictEqual([]);
+    expect(res.toJS()).toStrictEqual({});
   });
 
   it('Test that FETCH_COURSE_SUCCESS returns the data passed', () => {
@@ -28,28 +30,9 @@ describe('Testing courseReducer', () => {
         }
       ]
     };
-    const expected = [
-      {
-        id: 1,
-        name: "ES6",
-        "isSelected": false,
-        credit: 60
-      },
-      {
-        id: 2,
-        name: "Webpack",
-        "isSelected": false,
-        credit: 20
-      },
-      {
-        id: 3,
-        name: "React",
-        "isSelected": false,
-        credit: 40
-      }
-    ];
+    const expected = {"1": {"credit": 60, "id": 1, "isSelected": false, "name": "ES6"}, "2": {"credit": 20, "id": 2, "isSelected": false, "name": "Webpack"}, "3": {"credit": 40, "id": 3, "isSelected": false, "name": "React"}};
     const res = courseReducer(undefined, action);
-    expect(res).toStrictEqual(expected);
+    expect(res.toJS()).toStrictEqual(expected);
   });
 
   it('Test that SELECT_COURSE returns the data with the right item updated', () => {
@@ -57,49 +40,49 @@ describe('Testing courseReducer', () => {
       type: actions.SELECT_COURSE,
       index: 1
     };
-    const expected = [
+    const expected = coursesNormalizer([
       {
         id: 1,
         name: "ES6",
-        "isSelected": true,
+        isSelected: true,
         credit: 60
       },
       {
         id: 2,
         name: "Webpack",
-        "isSelected": false,
+        isSelected: false,
         credit: 20
       },
       {
         id: 3,
         name: "React",
-        "isSelected": false,
+        isSelected: false,
         credit: 40
       }
-    ];
-    const state = [
+    ]);
+    const state = Map(coursesNormalizer([
       {
         id: 1,
         name: "ES6",
-        "isSelected": false,
+        isSelected: false,
         credit: 60
       },
       {
         id: 2,
         name: "Webpack",
-        "isSelected": false,
+        isSelected: false,
         credit: 20
       },
       {
         id: 3,
         name: "React",
-        "isSelected": false,
+        isSelected: false,
         credit: 40
       }
-    ];
+    ]));
 
     const res = courseReducer(state, action);
-    expect(res).toStrictEqual(expected);
+    expect(res.toJS()).toStrictEqual(expected);
   });
 
   it('Test that UNSELECT_COURSE returns the data with the right item updated', () => {
@@ -107,27 +90,8 @@ describe('Testing courseReducer', () => {
       type: actions.UNSELECT_COURSE,
       index: 1
     };
-    const expected = [
-      {
-        id: 1,
-        name: "ES6",
-        "isSelected": false,
-        credit: 60
-      },
-      {
-        id: 2,
-        name: "Webpack",
-        "isSelected": false,
-        credit: 20
-      },
-      {
-        id: 3,
-        name: "React",
-        "isSelected": false,
-        credit: 40
-      }
-    ];
-    const state = [
+    const expected = {"1": {"credit": 60, "id": 1, "isSelected": false, "name": "ES6"}, "2": {"credit": 20, "id": 2, "isSelected": false, "name": "Webpack"}, "3": {"credit": 40, "id": 3, "isSelected": false, "name": "React"}};
+    const state = Map(coursesNormalizer([
       {
         id: 1,
         name: "ES6",
@@ -146,9 +110,10 @@ describe('Testing courseReducer', () => {
         "isSelected": false,
         credit: 40
       }
-    ];
+    ]));
 
     const res = courseReducer(state, action);
-    expect(res).toStrictEqual(expected);
+    console.log(res.toJS())
+    expect(res.toJS()).toStrictEqual(expected);
   });
 });
