@@ -1,45 +1,81 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
+import React from "react";
+import PropTypes from "prop-types";
+import { StyleSheet, css } from "aphrodite";
+
+const NotificationItem = React.memo(function NotificationItem({
+  type,
+  value,
+  html,
+  markAsRead,
+  id,
+}) {
+  let listItem;
+
+  let typeStyle = css(type === "urgent" ? styles.urgent : styles.default);
+
+  if (value) {
+    listItem = (
+      <li
+        className={typeStyle}
+        data-notification-type={type}
+        onClick={() => markAsRead(id)}
+      >
+        {value}
+      </li>
+    );
+  } else {
+    listItem = (
+      <li
+        className={typeStyle}
+        data-notification-type={type}
+        dangerouslySetInnerHTML={html}
+        onClick={() => markAsRead(id)}
+      ></li>
+    );
+  }
+
+  return listItem;
+});
+
+NotificationItem.defaultProps = {
+  type: "default",
+  value: "",
+  html: {},
+  markAsRead: () => {},
+  id: NaN,
+};
+
+NotificationItem.propTypes = {
+  type: PropTypes.string,
+  value: PropTypes.string,
+  html: PropTypes.shape({
+    __html: PropTypes.string,
+  }),
+  markAsRead: PropTypes.func,
+  id: PropTypes.number,
+};
+
+const screenSize = {
+  small: "@media screen and (max-width: 900px)",
+};
+
+const listItemSmall = {
+  listStyle: "none",
+  borderBottom: "1px solid black",
+  padding: "10px 8px",
+  fontSize: "20px",
+};
 
 const styles = StyleSheet.create({
   default: {
-    color: "darkblue"
+    color: "blue",
+    [screenSize.small]: listItemSmall,
   },
 
   urgent: {
-    color:"red"
+    color: "red",
+    [screenSize.small]: listItemSmall,
   },
+});
 
-  listItem: {
-    '@media (max-width: 900px)': {
-      borderBottom: "1px solid black",
-      listStyle: "none",
-      paddingTop: 10,
-      paddingBottom: 10,
-      paddingLeft: 8,
-      paddingRight: 8
-    }
-  }
-
-})
-
-const NotificationItem = React.memo(function NotificationItem(props) {
-  const NotifType = css(props.type == "default" ? styles.default : styles.urgent, styles.listItem)
-  return(
-    <li className={NotifType} data-notification-type={props.type} dangerouslySetInnerHTML={props.html}
-    onClick={()=>props.markAsRead(props.id)}>{props.value}</li>
-  )
-})
-
-NotificationItem.defaultProps = {
-  type: "default"
-}
-
-NotificationItem.propTypes = {
-  type: PropTypes.string.isRequired,
-  html: PropTypes.shape({__html: PropTypes.string}),
-  value: PropTypes.string
-}
-
-export default NotificationItem
+export default NotificationItem;
